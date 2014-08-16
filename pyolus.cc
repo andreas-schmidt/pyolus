@@ -4,6 +4,8 @@
 
 namespace bp = boost::python;
 
+// wrappers for char[] members
+// TODO error handling in the setters
 std::string adds_get_filename(Addsynth const& self)
 {
 	return std::string(self._filename);
@@ -18,6 +20,42 @@ std::string adds_get_stopname(Addsynth const& self)
 {
 	return std::string(self._stopname);
 }
+
+void adds_set_stopname(Addsynth & self, std::string const& name)
+{
+	strncpy(self._stopname, name.c_str(), sizeof(self._stopname));
+}
+
+std::string adds_get_copyrite(Addsynth const& self)
+{
+	return std::string(self._copyrite);
+}
+
+void adds_set_copyrite(Addsynth & self, std::string const& name)
+{
+	strncpy(self._copyrite, name.c_str(), sizeof(self._copyrite));
+}
+
+std::string adds_get_mnemonic(Addsynth const& self)
+{
+	return std::string(self._mnemonic);
+}
+
+void adds_set_mnemonic(Addsynth & self, std::string const& name)
+{
+	strncpy(self._mnemonic, name.c_str(), sizeof(self._mnemonic));
+}
+
+std::string adds_get_comments(Addsynth const& self)
+{
+	return std::string(self._comments);
+}
+
+void adds_set_comments(Addsynth & self, std::string const& name)
+{
+	strncpy(self._comments, name.c_str(), sizeof(self._comments));
+}
+
 
 BOOST_PYTHON_MODULE(pyolus)
 {
@@ -57,27 +95,27 @@ BOOST_PYTHON_MODULE(pyolus)
 	.def("load", &Addsynth::load)
     
 	.add_property("filename", &adds_get_filename, &adds_set_filename)
-	.add_property("stopname", &adds_get_stopname)
-//	.add_property("copyrite", )
-//	.add_property("mnemonic", )
-//	.add_property("comments", )
+	.add_property("stopname", &adds_get_stopname, &adds_set_stopname)
+	.add_property("copyrite", &adds_get_copyrite, &adds_set_copyrite)
+	.add_property("mnemonic", &adds_get_mnemonic, &adds_set_mnemonic)
+	.add_property("comments", &adds_get_comments, &adds_set_comments)
 //	.add_property("reserved", )
 	.def_readwrite("n0", &Addsynth::_n0)
 	.def_readwrite("n1", &Addsynth::_n1)
 	.def_readwrite("fn", &Addsynth::_fn)
 	.def_readwrite("fd", &Addsynth::_fd)
-//	N_func     _n_vol;
-//	N_func     _n_off;
-//	N_func     _n_ran;         
-//	N_func     _n_ins;
-//	N_func     _n_att;
-//	N_func     _n_atd;         
-//	N_func     _n_dct;
-//	N_func     _n_dcd;         
-//	HN_func    _h_lev;
-//	HN_func    _h_ran;
-//	HN_func    _h_att;
-//	HN_func    _h_atp;
+	.def_readonly("n_vol", &Addsynth::_n_vol)
+	.def_readonly("n_off", &Addsynth::_n_off)
+	.def_readonly("n_ran", &Addsynth::_n_ran)
+	.def_readonly("n_ins", &Addsynth::_n_ins)
+	.def_readonly("n_att", &Addsynth::_n_att)
+	.def_readonly("n_atd", &Addsynth::_n_atd)
+	.def_readonly("n_dct", &Addsynth::_n_dct)
+	.def_readonly("n_dcd", &Addsynth::_n_dcd)
+	.def_readonly("h_lev", &Addsynth::_h_lev)
+	.def_readonly("h_ran", &Addsynth::_h_ran)
+	.def_readonly("h_att", &Addsynth::_h_att)
+	.def_readonly("h_atp", &Addsynth::_h_atp)
 
 	.def_readwrite("pan", &Addsynth::_pan)
 	.def_readwrite("del", &Addsynth::_del)
