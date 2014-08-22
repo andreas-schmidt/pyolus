@@ -59,6 +59,11 @@ void adds_set_comments(Addsynth & self, std::string const& name)
 
 BOOST_PYTHON_MODULE(pyolus)
 {
+	bp::scope().attr("N_NOTE") = N_NOTE;
+	bp::scope().attr("N_HARM") = N_HARM;
+	bp::scope().attr("NOTE_MIN") = NOTE_MIN;
+	bp::scope().attr("NOTE_MAX") = NOTE_MAX;
+
 	bp::class_<N_func>("N_func")
 	.def("reset", &N_func::reset)
 	.def("setv", &N_func::setv)
