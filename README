@@ -1,0 +1,24 @@
+pyolus: python wrapper around Aeolus data structures
+
+Aeolus is a virtual pipe organ for Linux created by Fons Adriaensen:
+
+http://kokkinizita.linuxaudio.org/linuxaudio/aeolus/index.html
+
+The stop definitions (synthesis parameters) are stored in a custom binary
+format in .ae0-Files and can only be edited via the built-in stop editor.
+This module uses boost::python to wrap the corresponding data structures so
+that you can read, write, explore and change these stop definitions from
+within your own python programs.
+
+To build it, you need to have the Aeolus source code; it's available on the
+page linked above. The Makefile assumes that the aeolus source folder is on
+the same level than the pyolus folder. Furthermore, you need to have the
+boost python library from http://www.boost.org
+
+Please dont't hesitate to contact me with questions - especially in this
+undocumented state!
+
+TODO
+- usage example
+- setup.py
+
